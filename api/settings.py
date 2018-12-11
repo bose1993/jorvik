@@ -3,6 +3,7 @@ SCOPE_ANAGRAFICA_LETTURA_BASE = 'anagrafica_lettura_base'
 SCOPE_ANAGRAFICA_LETTURA_COMPLETA = 'anagrafica_lettura_completa'
 SCOPE_ANAGRAFICA_LETTURA_TELEFONO = 'anagrafica_lettura_telefono'
 SCOPE_APPARTENENZE_LETTURA = 'appartenenze_lettura'
+SCOPE_TURNI_COMITATO = 'turni_comitato'
 
 
 OAUTH2_PROVIDER = {
@@ -12,6 +13,7 @@ OAUTH2_PROVIDER = {
                                            "sesso e codice fiscale).",
         SCOPE_ANAGRAFICA_LETTURA_TELEFONO: "Lettura dei numeri di telefono",
         SCOPE_APPARTENENZE_LETTURA:        "Lettura delle appartenenze attuali",
+        SCOPE_TURNI_COMITATO: "Ottiene i turni disponibili per il comitato"
     },
 
     'DEFAULT_SCOPES': [SCOPE_ANAGRAFICA_LETTURA_BASE]

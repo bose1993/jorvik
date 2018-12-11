@@ -108,6 +108,3 @@ def appartenenza(appartenenza):
     dati.update({"tipo": _campo(id=appartenenza.membro, descrizione=appartenenza.get_membro_display()),
                  "sede": sede(appartenenza.sede)})
     return dati
-
-
-

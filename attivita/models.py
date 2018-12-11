@@ -16,12 +16,12 @@ from anagrafica.permessi.applicazioni import REFERENTE, OBIETTIVI
 from anagrafica.permessi.costanti import MODIFICA
 from anagrafica.permessi.incarichi import INCARICO_GESTIONE_ATTIVITA_PARTECIPANTI, INCARICO_PRESIDENZA
 from base.files import PDF
+from base.geo import ConGeolocalizzazione
+from base.models import ModelloSemplice, ConAutorizzazioni, ConAllegati, ConVecchioID, Autorizzazione
+from base.tratti import ConMarcaTemporale, ConDelegati
 from base.utils import concept, poco_fa
 from posta.models import Messaggio
 from social.models import ConGiudizio, ConCommenti
-from base.models import ModelloSemplice, ConAutorizzazioni, ConAllegati, ConVecchioID, Autorizzazione
-from base.tratti import ConMarcaTemporale, ConDelegati
-from base.geo import ConGeolocalizzazione
 
 
 class Attivita(ModelloSemplice, ConGeolocalizzazione, ConMarcaTemporale, ConGiudizio, ConCommenti,
@@ -479,7 +479,7 @@ class Turno(ModelloSemplice, ConMarcaTemporale, ConGiudizio):
 
     @classmethod
     @concept
-    def query_futuri(cls, *args, ora=None, **kwargs):
+    def query_futuri(cls, ora=None, *args, **kwargs):
         ora = ora or timezone.now()
         return Q(
             *args,
@@ -489,7 +489,7 @@ class Turno(ModelloSemplice, ConMarcaTemporale, ConGiudizio):
 
     @classmethod
     @concept
-    def query_passati(cls, *args, ora=None, **kwargs):
+    def query_passati(cls, ora=None, *args, **kwargs):
         ora = ora or timezone.now()
         return Q(
             *args,
@@ -648,7 +648,6 @@ class Partecipazione(ModelloSemplice, ConMarcaTemporale, ConAutorizzazioni):
         """
         (Automatico)
         Invia notifica di autorizzazione negata.
-        :param motivo: Motivazione, se presente.
         """
         # TODO
         pass

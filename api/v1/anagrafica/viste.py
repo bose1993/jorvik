@@ -1,12 +1,14 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import permissions
+# coding=utf-8
 
 from oauth2_provider.ext.rest_framework import TokenHasScope
-from api.settings import SCOPE_ANAGRAFICA_LETTURA_BASE, SCOPE_ANAGRAFICA_LETTURA_COMPLETA, SCOPE_APPARTENENZE_LETTURA
+from rest_framework import permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from api.v1 import serializzatori
 from anagrafica.permessi.applicazioni import PERMESSI_NOMI_DICT
+from api.settings import SCOPE_ANAGRAFICA_LETTURA_BASE, SCOPE_ANAGRAFICA_LETTURA_COMPLETA, SCOPE_APPARTENENZE_LETTURA
+from api.v1.anagrafica import serializzatori
+
 
 # /me/anagrafica/base/
 class MiaAnagraficaBase(APIView):
@@ -56,7 +58,6 @@ class MieAppartenenzeAttuali(APIView):
 
 
 class MiaAppartenenzaComplaeta(APIView):
-
     """
         ID utente, - Persona
 
@@ -131,4 +132,4 @@ class MiaAppartenenzaComplaeta(APIView):
 
         return Response(dati)
 
-#serializzatori._campo(comitato.estensione, comitato.get_estensione_display())
+# serializzatori._campo(comitato.estensione, comitato.get_estensione_display())
