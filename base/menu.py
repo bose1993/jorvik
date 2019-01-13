@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
 
 from anagrafica.costanti import REGIONALE, TERRITORIALE, LOCALE
 from anagrafica.models import Sede
@@ -9,7 +10,8 @@ from anagrafica.permessi.applicazioni import DELEGATO_OBIETTIVO_1, DELEGATO_OBIE
     RESPONSABILE_AUTOPARCO, DELEGATO_CO, REFERENTE_GRUPPO, RUBRICHE_TITOLI, COMMISSARIO
 from anagrafica.permessi.costanti import GESTIONE_CORSI_SEDE, GESTIONE_ATTIVITA, GESTIONE_ATTIVITA_AREA, ELENCHI_SOCI, \
     GESTIONE_AREE_SEDE, GESTIONE_ATTIVITA_SEDE, EMISSIONE_TESSERINI, GESTIONE_POTERI_CENTRALE_OPERATIVA_SEDE
-from base.utils import remove_none
+from .utils import remove_none
+from .models import Menu
 
 __author__ = 'alfioemanuele'
 
@@ -70,6 +72,9 @@ def menu(request):
         RUBRICA_BASE
     ))
 
+    VOCE_LINKS = ("Links", tuple((link.name, link.icon_class, link.url)
+            for link in Menu.objects.filter(is_active=True).order_by('order')))
+
     elementi = {
         "utente": (
             (("Persona", (
@@ -103,6 +108,7 @@ def menu(request):
                 ("Cambia password", "fa-key", "/utente/cambia-password/"),
                 ("Impostazioni Privacy", "fa-cogs", "/utente/privacy/"),
             )),
+            VOCE_LINKS
         )) if me and not hasattr(me, 'aspirante') else None,
         "posta": (
             ("Posta", (
